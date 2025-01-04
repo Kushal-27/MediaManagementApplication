@@ -12,12 +12,11 @@ def media_management(request):
     if request.method == 'POST':
         form = MediaForm(request.POST, request.FILES)
         if form.is_valid():
-            media_file = request.FILES['file']
-            media = Media(file=media_file, name=media_file.name, size=media_file.size, file_type=media_file.content_type)
-            media.save()
-            messages.success(request, "File uploaded successfully!")
+            for media_file in request.FILES.getlist('files'):
+                media = Media(file=media_file, name=media_file.name, size=media_file.size, file_type=media_file.content_type)
+                media.save()
+            messages.success(request, "Files uploaded successfully!")
             return redirect('media_management')
-
     else:
         form = MediaForm()
 
