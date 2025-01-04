@@ -36,7 +36,7 @@ class MultipleFileField(forms.FileField):
             raise ValidationError(f"The file {file.name} exceeds the size limit of 5MB.")
 
     def validate_file_type(self, file):
-        allowed_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.pdf']
+        allowed_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.pdf', '.mp4', '.mp3']
         extension = file.name.split('.')[-1].lower()
         if f'.{extension}' not in allowed_extensions:
             raise ValidationError(f"The file {file.name} has an unsupported file type. Allowed types: {', '.join(allowed_extensions)}.")
